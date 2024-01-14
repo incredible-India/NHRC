@@ -1,4 +1,5 @@
 from django.shortcuts import render
 
 def index(request):
-    return render(request,'index.html');
+    print("hello")
+    return render(request,'index.html')

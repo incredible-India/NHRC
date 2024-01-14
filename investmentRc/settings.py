@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#string encoding and decoding
+EncKey = "!@#$gfhgfDNHER@#$%098789)(*&&^%^&*()+=)"
 
 # Application definition
 
