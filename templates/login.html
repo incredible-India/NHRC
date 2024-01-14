@@ -1,6 +1,6 @@
 
 {% extends "core/base.html" %}
-
+{% load static %}
 {% block content %}
 
 <style>
@@ -160,28 +160,39 @@
 
     <div class="bg"></div>
 
-    <form>
+    <form method="post", action="{% url "login" %}">
+		{% csrf_token %}
         <header>
             <img src="https://assets.codepen.io/3931482/internal/avatars/users/default.png?format=auto&height=80&version=1592223909&width=80">
-            <h1 class="text-white">N&H IRC</h1>
+            <h1 class="text-white" title="Namya & Himanshu Investment Records">N&H IRC</h1>
         </header>
 
         <div class="inputs">
-            <input type="text" name="" placeholder="phone or email">
-            <input type="password" name="" placeholder="password">
+            <input type="text" name="username" id="username" placeholder="phone or email" required>
+            <input type="password" name="password" id="password" placeholder="password" required>
 
             <p class="light"><a href="#">Forgot password?</a></p>
         </div>
+		<p class="bg-dark" id="invalid" style="display:none;"><b class="text-danger">*Invalid Username Or Password</b></p>
+		{% if messages %}
+{% for k in messages %} 
 
+<p class="bg-dark" ><b class="text-danger">*Invalid Username Or Password</b></p>
+
+
+
+{% endfor %}
+{% endif %}
     </form>
 
     <footer>
-        <button>Continue</button>
+        <button  id="submit">Continue</button>
         <p>Don't have an account? <a href="#">Sign Up</a></p>
+	
     </footer>
-
-
+	
 </div>
 
+<script src="{% static "superusers/js/login.js" %}"></script>
 
 {% endblock content %}
