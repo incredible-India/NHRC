@@ -2,9 +2,6 @@
 #if user is logged in we will show direct profile page and if not we will send response for creating account or login page and
 from superusers.models import users 
 from django.db.models import Q
-from django.conf import settings
-from cryptography.fernet import Fernet
-
 
 class checkingUserAuthentication:
     def __init__(self,get_response):
@@ -13,13 +10,8 @@ class checkingUserAuthentication:
     def __call__(self,request):
         if 'email' in request.session:
             if 'phone' in request.session:
-                enckey =  b'oDc1xWBsBECT3toxs8dQRJBPC85q47nRbUybtcOqJGc='
-                print("<----------------------------")
-                fernet = Fernet(enckey)
-                print("<----------------------------",request.session['email'],type(request.session['email']))
-                email=fernet.decrypt(request.session['email']).decode()
-                phone=fernet.decrypt(request.session['phone']).decode()
-                print(email.phone,"<----------------------------")
+                email=request.session['email']
+                phone=request.session['phone']
                 isExist = users.objects.filter(Q(email=email)& Q(phone=phone))
                 if len(isExist) == 1:
                     request.phone = phone

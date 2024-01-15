@@ -6,7 +6,6 @@ from django.contrib import messages
 from django.views import View
 from investmentRc import middleware
 from django.utils.decorators import method_decorator
-from cryptography.fernet import Fernet
 from django.conf import settings
 # Create your views here.
 
@@ -29,11 +28,20 @@ class login(View):
         isUser  = users.objects.filter(Q(Q(email=username) | Q(phone=username)) & Q(password=password))
 
         if isUser.exists() and  isUser.count() ==1:
-            enckey =b'oDc1xWBsBECT3toxs8dQRJBPC85q47nRbUybtcOqJGc=' #Fernet.generate_key()#getattr(settings, 'EncKey', b'nhirc')
-            fernet = Fernet(enckey)
-            request.session['email'] = fernet.encrypt(username.encode('utf-8'))
-            request.session['phone'] = fernet.encrypt(isUser[0].phone.encode('utf-8'))
+            request.session['email'] = username
+            request.session['phone'] =isUser[0].phone
             return HttpResponseRedirect("/user/login")
         else:
             messages.error(request,"Invalid Cradetnials")
             return HttpResponseRedirect("/user/login")  
+        
+
+#logout user
+class logout(View):
+    @method_decorator(middleware.checkingUserAuthentication)
+    def get(self,request):
+        if request.isauth:
+            del request.session['email']
+            del request.session['phone']
+        return HttpResponseRedirect("/user/login")
+      

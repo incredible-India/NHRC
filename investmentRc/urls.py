@@ -20,6 +20,6 @@ from . import views as mv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', mv.index),
+    path('', mv.index.as_view(),name="home"),
     path('user/', include('superusers.urls')),
 ]
