@@ -2,6 +2,50 @@
 
 {% block content %}
 
-{% include "core/nav.html" %}
+{% include "core/nav.html" with update=1 %}
+
+{% comment %} main 2 categories divid
+ed  {% endcomment %}
+
+<div class="row"> 
+
+    <div class="col-sm-3">
+        {% comment %} summary of investment {% endcomment %}
+
+        <div class="mt-4 mx-2 ">
+            <h5><i class="fas fa-book"></i> Investment Summary </h5>
+            <hr>
+        </div>
+
+    </div>
+
+
+
+
+
+
+    <div class="col-sm-8">
+
+        {% comment %} monthly summary {% endcomment %}
+      <div class="row"> 
+
+        <div class="col-sm-8">
+            {% include "globalChart/MonthlySummary.html" %}
+        </div>
+        <div class="col-sm-4  mt-4">
+            {% include "globalChart/gauge.html" %}
+        </div>
+
+      </div>
+
+      {% comment %} ////////////// {% endcomment %}
+      <div style="overflow-x:hidden">{% include "globalChart/bar.html" %}</div>
+      <div style="overflow-x:hidden">{% include "globalChart/stockCrypto.html" %}</div>
+
+    </div>
+
+
+
+</div>
 
 {% endblock content %}
