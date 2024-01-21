@@ -21,4 +21,5 @@ class UserRecord(models.Model):
     InvetsMentType = models.CharField(max_length=20,choices= Investment_type,default='individual')
     InvetsMentCategory = models.CharField(max_length=20,choices= Investment_category,default='Equity')
     Ammount =  models.DecimalField(max_digits=10,decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
 

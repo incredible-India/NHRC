@@ -6,4 +6,4 @@ class usersADMIN(admin.ModelAdmin):
     list_display = ['id','name','email','phone','password','address','account','userimg','gender']
 @admin.register(UserRecord)
 class UserRecordADMIN(admin.ModelAdmin):
-    list_display = ['id','userid','InvetsMentType','InvetsMentCategory','Ammount']
+    list_display = ['id','userid','InvetsMentType','InvetsMentCategory','Ammount','created_at']
