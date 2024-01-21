@@ -11,3 +11,14 @@ class users(models.Model):
     account = models.DateTimeField(default=datetime.datetime.now(), blank=True,null=True)
     gender = models.CharField(max_length=20,choices=GENDER_CHOICES,default='male')
     userimg = models.ImageField(upload_to='userimg/' ,null=True)
+
+
+#User Records including individual and Common records
+class UserRecord(models.Model):
+    userid = models.ForeignKey(users,on_delete=models.CASCADE)
+    Investment_type	=	(('individual',	'Individual'),('Common',	'Common'))
+    Investment_category	=	(('Equity',	'Equity'),('Crypto',	'Crypto'),('Mutual Fund',	'Mutual Fund'),('Other',	'Other'))
+    InvetsMentType = models.CharField(max_length=20,choices= Investment_type,default='individual')
+    InvetsMentCategory = models.CharField(max_length=20,choices= Investment_category,default='Equity')
+    Ammount =  models.DecimalField(max_digits=10,decimal_places=2)
+

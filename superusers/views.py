@@ -44,4 +44,15 @@ class logout(View):
             del request.session['email']
             del request.session['phone']
         return HttpResponseRedirect("/user/login")
+    
+#entry of records
+class UserEntry(View):
+    @method_decorator(middleware.checkingUserAuthentication)
+    def get(self,request):
+        if request.isauth:
+            return render(request,'superusers/entry.html')
+        else:
+            return HttpResponseRedirect("/user/login")
+
+
       
