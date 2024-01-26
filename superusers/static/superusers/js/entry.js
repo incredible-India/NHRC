@@ -1,37 +1,38 @@
 const ctx = document.getElementById('myChart');
 
 new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    datasets: [{
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
-      borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
     }
-  }
 });
 
 
 //Add One More Box
-class Form{
-
-  //  AddButton = document.getElementById("AddMore");
-    constructor(){
+class Form {
+    index = 0
+    isRemoveButtonAvailable = false
+    //  AddButton = document.getElementById("AddMore");
+    constructor() {
 
     }
 
-    AddOneMoreBox(){
+    AddOneMoreBox() {
         let targetDiv = document.getElementById("insertInto");
-        
-        let HtmlToInsert =` <div class="row">
+        this.index++;
+        let HtmlToInsert = ` <div class="row rmv${this.index}" id="div${this.index}">
 
         <div class="col-sm-8" style="display: flex; flex-direction: row;">
          <!-- ........................... -->
@@ -60,21 +61,39 @@ class Form{
         
         </div>
         
-        <div class="mx-4 mt-3"><label for="iAmmount"><b>₹</b> Ammount</label>
+        <div class="mx-4 mt-3"><label for="iAmmount"><b>₹</b>Investment Ammount</label>
             <input type="text" class="form-control" id="iAmmount">
             </div>
             
-            <div class="mx-2 mt-4"><input title="Remove" type="button" class="btn btn-danger" value=" - " style="margin-top: 14px;"></div>
+            <div class="mx-2 mt-4"><input title="Remove" type="button" class="btn btn-danger rmv" id="rmv${this.index}" value=" - " style="margin-top: 14px;"></div>
         </div> <hr class="mt-2">`;
 
         targetDiv.innerHTML += HtmlToInsert;
+        this.isRemoveButtonAvailable = true;
 
+    }
+
+    RemoveInputBox(targetClassName) {
+        if (this.isRemoveButtonAvailable) {
+            document.getElementsByClassName(targetClassName)[0].remove();
+        }
     }
 }
 
 form = new Form();
-let button  = document.getElementById("AddMore");
+//adding the form
+let button = document.getElementById("AddMore");
 button.onclick = () => {
-    console.log("hello");
     form.AddOneMoreBox();
+    //for removing the form
+    if (form.isRemoveButtonAvailable) {
+        let removeButton = document.getElementsByClassName("rmv");
+
+        Array.from(removeButton).forEach(e => {
+            e.addEventListener("click", (targetButton) => {
+                form.RemoveInputBox(e.id);
+            })
+        });
+    }
 };
+
