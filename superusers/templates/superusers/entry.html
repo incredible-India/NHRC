@@ -1,7 +1,82 @@
 {% extends "core/base.html" %}
-
+{% load static %}
 {% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% include "core/nav.html" with update=1 %}
 
-{% include "core/nav.html" %}
+
+
+
+<dic class="row">
+
+    <div class="col-sm-8">
+  
+       <div>
+        <form>
+
+            <div class="row">
+
+<div class="col-sm-8" style="display: flex; flex-direction: row;">
+ <!-- ........................... -->
+<div class="mx-4 mt-3"><label for="iType">Investment Type</label>
+
+    <select name="iType" id="iType" class="form-control">
+    <option value="individual">Individual</option>
+    <option value="common">Common</option>
+    
+    
+    </select></div>
+
+
+<div class="mx-4 mt-3">
+    <label for="iCategory">Investment Category</label>
+
+<select name="iCategory" id="iCategory" class="form-control">
+<option value="Equity">Equity</option>
+<option value="Crypto">Crypto</option>
+<option value="Mutual Fund">Mutual Fund</option>
+<option value="F&O">F&O</option>
+<option value="Other">Other</option>
+
+
+</select>
+
+</div>
+
+<div class="mx-4 mt-3"><label for="iAmmount"><b>₹</b> Ammount</label>
+    <input type="text" class="form-control" id="iAmmount">
+    </div>
+
+</div>
+
+ </div>
+<!-- ......................... -->
+<div id="insertInto"></div>
+    </div>
+   
+<div class="mt-3 mx-3">
+    <input type="button" class="btn btn-primary" id="AddMore" value="+ Add More" title="Add One More Field">
+    <input type="button" class="btn btn-success" value="Submit">
+</div>
+
+        </form>
+       </div>
+
+    </div>
+
+
+    <div class="col-sm-4">
+        <div>
+            <canvas id="myChart"></canvas>
+          </div>
+    </div>
+
+
+<script src="{% static 'superusers/js/entry.js' %}"></script>
+
+</div>
+
+
+
 
 {% endblock content %}

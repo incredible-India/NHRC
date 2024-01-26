@@ -16,8 +16,8 @@ class users(models.Model):
 #User Records including individual and Common records
 class UserRecord(models.Model):
     userid = models.ForeignKey(users,on_delete=models.CASCADE)
-    Investment_type	=	(('individual',	'Individual'),('Common',	'Common'))
-    Investment_category	=	(('Equity',	'Equity'),('Crypto',	'Crypto'),('Mutual Fund',	'Mutual Fund'),('Other',	'Other'))
+    Investment_type	=	(('individual',	'Individual'),('common',	'Common'))
+    Investment_category	=	(('Equity',	'Equity'),('Crypto',	'Crypto'),('Mutual Fund',	'Mutual Fund'),("F&O","Future and Options"),('Other',	'Other'))
     InvetsMentType = models.CharField(max_length=20,choices= Investment_type,default='individual')
     InvetsMentCategory = models.CharField(max_length=20,choices= Investment_category,default='Equity')
     Ammount =  models.DecimalField(max_digits=10,decimal_places=2)
