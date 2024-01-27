@@ -91,6 +91,7 @@ class Form {
         this.Common = []
         this.total = 0
         Array.from(document.forms[0].elements).forEach((e,i)=>{
+            console.log(i,document.getElementsByClassName("amt")[i]);
             if(e.id == 'iAmmount')
                 if(e.value.trim().length != 0)
                     this.total += parseFloat(e.value) 
